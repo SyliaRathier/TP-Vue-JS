@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import type { Ref } from 'vue';
+import TacheDeListe from '@/composants/TacheDeListe.vue';
 
 const prop = defineProps<{ titre: string }>();
 
@@ -49,10 +50,8 @@ const tachesFiltrees = computed(() => {
         <button @click="ajouterTache"> ajouter </button>
         <ul>
             <li v-for="tache in tachesFiltrees" :key="tache.id">
-                <p>{{ tache.faite }}</p>
-                <input id="id" type="checkbox" v-model="tache.faite" />
-                <span :class="{ fait: tache.faite }">{{ tache.description }}</span>
-                <button @click="retirerTache(tache)">Retirer tâche</button>
+                <TacheDeListe :description-tache="tache.description" :cochee="tache.faite"
+                    @supprimerTache="retirerTache(tache)" @checkedChange="(v) => tache.faite = v" />
             </li>
         </ul>
         <button @click="cacheFaits = !cacheFaits">
