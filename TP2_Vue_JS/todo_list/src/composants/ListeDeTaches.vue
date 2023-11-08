@@ -50,8 +50,9 @@ const tachesFiltrees = computed(() => {
         <button @click="ajouterTache"> ajouter </button>
         <ul>
             <li v-for="tache in tachesFiltrees" :key="tache.id">
-                <TacheDeListe :description-tache="tache.description" :cochee="tache.faite"
-                    @supprimerTache="retirerTache(tache)" @checkedChange="(v) => tache.faite = v" />
+                <TacheDeListe v-model="tache.faite" @supprimerTache="retirerTache(tache)">
+                    {{ tache.description }}
+                </TacheDeListe>
             </li>
         </ul>
         <button @click="cacheFaits = !cacheFaits">

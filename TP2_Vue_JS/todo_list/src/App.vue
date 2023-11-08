@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ListeDeTaches from '@/composants/ListeDeTaches.vue';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import type { Ref } from 'vue';
 
 interface ListeInfo {
@@ -28,6 +28,7 @@ function retirerListe(liste: ListeInfo) {
   const index = todoListes.value.indexOf(liste);
   todoListes.value.splice(index, 1);
 }
+
 </script>
 
 <template>
@@ -39,3 +40,4 @@ function retirerListe(liste: ListeInfo) {
 
 <style scoped>
 </style>
+<!-- https://matthieu-rosenfeld.github.io/tutorials/TD2.html -->
