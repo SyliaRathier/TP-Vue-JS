@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/router';
 import { storeAuthentification } from '@/store/storeAuthentification';
 import { ref } from 'vue';
 
@@ -18,10 +19,11 @@ function envoyer() {
         },
         body: JSON.stringify({ message: messagePublication }),
     }).then(reponsehttp => {
-        if (reponsehttp.status !== 200) {
+        if (reponsehttp.status !== 201) {
             console.log("Echec")
         } else {
             console.log("Succes")
+            router.push('/feed')
         }
         console.log(reponsehttp.json())
     });
