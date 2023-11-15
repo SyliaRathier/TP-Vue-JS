@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { storeAuthentification } from '../store/storeAuthentification';
 import { useRouter } from 'vue-router';
+import { flashMessage } from '@smartweb/vue-flash-message';
 const router = useRouter();
 let jwt = ref()
 const connectingUser = ref({
@@ -14,10 +15,18 @@ function connect(): void {
         connectingUser.value.login,
         connectingUser.value.password,
         () => {
+            flashMessage.show({
+                type: 'success',
+                title: 'Vous êtes connecté'
+            });
             router.push('/feed');
             //console.log(storeAuthentification.JWT)
         },
         () => {
+            flashMessage.show({
+                type: 'error',
+                title: 'La connection a échoué'
+            });
             connectingUser.value.login = "";
             connectingUser.value.password = "";
         });

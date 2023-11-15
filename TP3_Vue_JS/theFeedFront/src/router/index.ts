@@ -5,6 +5,7 @@ import SingleMessage from '../views/SingleMessage.vue'
 import SingleUser from '../views/SingleUser.vue'
 import Login from '../views/Login.vue'
 import FormulairePublication from '../views/FormulairePublication.vue'
+import Signin from '../views/Signin.vue'
 
 
  const router = createRouter({
@@ -42,6 +43,11 @@ import FormulairePublication from '../views/FormulairePublication.vue'
             path: '/poster',
             name: 'poster',
             component: FormulairePublication
+        },
+        {
+            path: '/singin',
+            name: 'signin',
+            component: Signin
         }
      ]
  })

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { storeAuthentification } from './store/storeAuthentification';
+
 const router = useRouter();
 </script>
 
@@ -11,11 +12,14 @@ const router = useRouter();
       <nav>
         <div @click="router.push({ name: 'allUsers' })">Les membres</div>
         <div v-if="storeAuthentification.estConnecte" @click="router.push({ name: 'poster' })">Poster</div>
-        <div v-if="!storeAuthentification.estConnecte">S'inscrire</div>
+        <div v-if="!storeAuthentification.estConnecte" @click="router.push({ name: 'signin' })">S'inscrire</div>
         <div v-if="!storeAuthentification.estConnecte" @click="router.push({ name: 'login' })">Se connecter</div>
+        <div v-if="storeAuthentification.estConnecte">Se déconnecter</div>
+
       </nav>
     </header>
     <main>
+      <FlashMessage position="top" time=100 />
       <router-view />
     </main>
   </div>

@@ -31,6 +31,11 @@ export const storeAuthentification = reactive({
             
         }})
         
-    }
-});
+    }, 
+    deconnection() : void{
+        this.JWT = "";
+        this.estConnecte = false
+    }      
+}
+);
 
