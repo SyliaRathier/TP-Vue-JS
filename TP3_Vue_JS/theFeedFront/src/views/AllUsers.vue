@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import type { Ref } from 'vue';
 import type { Utilisateur } from '@/types';
 import BoiteUtilisateur from '@/components/BoiteUtilisateur.vue';
+import type { storeAuthentification } from '@/store/storeAuthentification';
 
 const users: Ref<Utilisateur[]> = ref([]);
 onMounted(() => {

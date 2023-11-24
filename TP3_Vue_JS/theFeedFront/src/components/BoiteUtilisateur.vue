@@ -1,6 +1,30 @@
 <script setup lang="ts">
+import { storeAuthentification } from '@/store/storeAuthentification';
 import type { Utilisateur } from '@/types';
 const props = defineProps<{ utilisateur: Utilisateur }>();
+let login = props.utilisateur.login
+let adresseEmail = props.utilisateur.adresseEmail
+
+function modifier() {
+    fetch(`https://localhost:8000/api/utilisateurs/${props.utilisateur.id}`, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/merge-patch+json',
+            'Authorization': 'Bearer ' + storeAuthentification.JWT
+        },
+        body: JSON.stringify({
+            login: login,
+            adresseEmail: adresseEmail
+        }),
+    }).then(reponsehttp => {
+        console.log(reponsehttp.json())
+    });
+}
+
+var elbtn = document.getElementsByClassName("btn-modifier")
+if (props.utilisateur.id == storeAuthentification.user.id) {
+}
+
 </script>
 
 
@@ -14,12 +38,14 @@ const props = defineProps<{ utilisateur: Utilisateur }>();
         <div class="content">
             <div class="group">
                 <label>Login</label>
-                <input :value="utilisateur.login">
+                <input v-model="login">
             </div>
             <div class="group">
                 <label>Adresse e-mail</label>
-                <input :value="utilisateur.adresseEmail">
+                <input v-model="adresseEmail">
             </div>
+            <button class="btn-modifier" @click="modifier()">Modifier</button>
+
         </div>
     </div>
 </template>

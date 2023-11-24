@@ -20,7 +20,7 @@ function connect(): void {
                 title: 'Vous êtes connecté'
             });
             router.push('/feed');
-            //console.log(storeAuthentification.JWT)
+            console.log(storeAuthentification.JWT)
         },
         () => {
             flashMessage.show({

@@ -3,6 +3,11 @@ import BoiteUtilisateur from '@/components/BoiteUtilisateur.vue';
 import type { Utilisateur } from '@/types';
 import { type Ref, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router'
+import type { Publication } from '@/types';
+import BoitePublication from '@/components/BoitePublication.vue';
+import { storeAuthentification } from '@/store/storeAuthentification';
+
+
 const route = useRoute();
 const id = route.params.id;
 const user = ref<Utilisateur>({
@@ -19,8 +24,23 @@ onMounted(() => {
             user.value = reponseJSON;
         });
 });
+
+const publications: Ref<Publication[]> = ref([]);
+function chargerFeed() {
+    fetch(encodeURI('https://localhost:8000/api/utilisateurs/' + id + '/publications'))
+        .then(reponsehttp => reponsehttp.json())
+        .then(reponseJSON => {
+            publications.value = reponseJSON["hydra:member"];
+        });
+}
+onMounted(() => {
+    chargerFeed()
+})
+
 </script>
 
 <template>
-    <BoiteUtilisateur :key="user.id" :utilisateur="user" />
+    <BoiteUtilisateur v-if="storeAuthentification.user.id == user.id" :key="user.id" :utilisateur="user" />
+    <BoitePublication v-for="publication in publications" :key="publication.id" :publication="publication"
+        @updated="chargerFeed()" />
 </template>
