@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@smartweb/vue-flash-message": "^1.0.0-alpha.12",
+    "@smartweb/vue-flash-message": "^1.0.1",
     "vue": "^3.3.4",
     "vue-jwt-decode": "^0.1.0",
     "vue-router": "^4.2.5"
